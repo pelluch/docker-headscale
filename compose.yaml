@@ -1,6 +1,6 @@
 services:
   headscale:
-    image: headscale/headscale:<VERSION>
+    image: headscale/headscale:latest
     restart: unless-stopped
     container_name: headscale
     ports:
