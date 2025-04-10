@@ -22,7 +22,7 @@ services:
     image: ghcr.io/tale/headplane:latest
     container_name: headplane
     networks:
-      - headscale
+      - internal
     restart: unless-stopped
     ports:
       - '3000:3000'
@@ -41,4 +41,3 @@ services:
 
 networks:
   internal:
-    internal: true
