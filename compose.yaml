@@ -3,6 +3,8 @@ services:
     image: headscale/headscale:latest
     restart: unless-stopped
     container_name: headscale
+    networks:
+      - internal
     ports:
       - "8080:8080"
       - "127.0.0.1:9090:9090"
@@ -19,6 +21,8 @@ services:
     # I recommend you pin the version to a specific release
     image: ghcr.io/tale/headplane:latest
     container_name: headplane
+    networks:
+      - headscale
     restart: unless-stopped
     ports:
       - '3000:3000'
@@ -34,3 +38,7 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
     environment:
       - TZ=${TZ}
+
+networks:
+  internal:
+    internal: true
