@@ -12,9 +12,8 @@ services:
       - TZ=${TZ}
     volumes:
       # Please change <CONFIG_PATH> to the fullpath of the config folder just created
-      - /etc/headscale:/etc/headscale
-      - /var/run/headscale:/var/run/headscale
-      - /var/lib/headscale:/var/lib/headscale
+      - ./headscale/config:/etc/headscale
+      - ./headscale/lib/headscale:/var/lib/headscale
     command: serve
 
   headplane:
@@ -29,7 +28,7 @@ services:
     volumes:
       - './headplane/config/config.yaml:/etc/headplane/config.yaml'
       # This should match headscale.config_path in your config.yaml
-      - '/etc/headscale/config.yaml:/etc/headscale/config.yaml'
+      - './headscale/config.yaml:/etc/headscale/config.yaml'
 
       # Headplane stores its data in this directory
       - './headplane/data:/var/lib/headplane'
