@@ -28,7 +28,7 @@ services:
     volumes:
       - './headplane/config/config.yaml:/etc/headplane/config.yaml'
       # This should match headscale.config_path in your config.yaml
-      - './headscale/config.yaml:/etc/headscale/config.yaml'
+      - './headscale/config/config.yaml:/etc/headscale/config.yaml'
 
       # Headplane stores its data in this directory
       - './headplane/data:/var/lib/headplane'
