@@ -6,7 +6,7 @@ services:
     networks:
       - internal
     ports:
-      - "8080:8080"
+      - "${HEADSCALE_EXTERNAL_PORT}:8080"
       - "127.0.0.1:9090:9090"
     environment:
       - TZ=${TZ}
@@ -24,7 +24,7 @@ services:
       - internal
     restart: unless-stopped
     ports:
-      - '3000:3000'
+      - '${HEADPLANE_EXTERNAL_PORT}:3000'
     volumes:
       - './headplane/config/config.yaml:/etc/headplane/config.yaml'
       # This should match headscale.config_path in your config.yaml
