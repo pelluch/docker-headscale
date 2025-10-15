@@ -6,12 +6,6 @@ services:
     ports:
       - "${HEADSCALE_EXTERNAL_PORT}:8080"
       - "127.0.0.1:9090:9090"
-    healthcheck:
-      test: ["CMD-SHELL", "curl -fsS ${AUTHENTIK_HOST}/application/o/headscale/.well-known/openid-configuration || exit 1"]
-      interval: 5s
-      timeout: 2s
-      retries: 12
-      start_period: 10s
     environment:
       - TZ=${TZ}
     volumes:
@@ -27,13 +21,6 @@ services:
     restart: unless-stopped
     ports:
       - '${HEADPLANE_EXTERNAL_PORT}:3000'
-    healthcheck:
-      test: ["CMD-SHELL", "curl -fsS ${AUTHENTIK_HOST}/application/o/headplane/.well-known/openid-configuration || exit 1"]
-      interval: 5s
-      timeout: 2s
-      retries: 12
-      start_period: 10s
-
     volumes:
       - './headplane/config/config.yaml:/etc/headplane/config.yaml'
       # This should match headscale.config_path in your config.yaml
