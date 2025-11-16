@@ -1,7 +1,7 @@
 services:
   headscale:
     image: headscale/headscale:latest
-    restart: on-failure
+    restart: unless-stopped
     container_name: headscale
     ports:
       - "${HEADSCALE_EXTERNAL_PORT}:8080"
@@ -18,7 +18,9 @@ services:
     # I recommend you pin the version to a specific release
     image: ghcr.io/tale/headplane:latest
     container_name: headplane
-    restart: on-failure
+    restart: unless-stopped
+    depends_on:
+      - "headscale"
     ports:
       - '${HEADPLANE_EXTERNAL_PORT}:3000'
     volumes:
