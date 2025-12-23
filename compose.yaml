@@ -13,14 +13,20 @@ services:
       - ./headscale/config:/etc/headscale
       - ./headscale/lib/headscale:/var/lib/headscale
     command: serve
+    depends_on:
+      url-guard:
+        condition: service_healthy
 
   headplane:
     # I recommend you pin the version to a specific release
     image: ghcr.io/tale/headplane:latest
-    container_name: headplane
+    container_name: headplane 
     restart: unless-stopped
     depends_on:
-      - "headscale"
+      url-guard:
+        condition: service_healthy 
+      headscale:
+        condition: service_started
     ports:
       - '${HEADPLANE_EXTERNAL_PORT}:3000'
     volumes:
@@ -35,6 +41,24 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
     environment:
       - TZ=${TZ}
+
+  url-guard:
+    build: ./url-guard
+    container_name: url-guard
+    restart: unless-stopped
+    environment:
+      URL: "${URL}"
+      INTERVAL_SECONDS: "${URL_INTERVAL:-10}"
+      TIMEOUT_SECONDS: "${URL_TIMEOUT:-5}"
+      MAX_REDIRS: "${URL_MAX_REDIRS:-10}"
+      TARGET_CONTAINERS: "headscale headplane"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/url-guard.sh", "check"]
+      interval: 10s
+      timeout: 6s
+      retries: 5
 
 networks:
   default:
