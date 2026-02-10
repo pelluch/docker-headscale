@@ -23,7 +23,9 @@ Docker Compose stack running [Headscale](https://github.com/juanfont/headscale) 
    | Variable | Required | Description |
    |---|---|---|
    | `TZ` | no | Timezone (e.g. `America/New_York`) |
+   | `HEADSCALE_TAG` | no | Headscale image tag (default: `latest`) |
    | `HEADSCALE_EXTERNAL_PORT` | yes | Host port for headscale (maps to 8080) |
+   | `HEADPLANE_TAG` | no | Headplane image tag (default: `latest`) |
    | `HEADPLANE_EXTERNAL_PORT` | yes | Host port for headplane (maps to 3000) |
    | `OIDC_URL` | yes | OIDC endpoint URL to monitor (e.g. your discovery endpoint) |
    | `OIDC_URL_INTERVAL` | no | Polling interval in seconds (default: 10) |

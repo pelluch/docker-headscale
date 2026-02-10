@@ -1,6 +1,6 @@
 services:
   headscale:
-    image: headscale/headscale:latest
+    image: headscale/headscale:${HEADSCALE_TAG:-latest}
     restart: unless-stopped
     container_name: headscale
     ports:
@@ -17,7 +17,7 @@ services:
         condition: service_healthy
 
   headplane:
-    image: ghcr.io/tale/headplane:latest
+    image: ghcr.io/tale/headplane:${HEADPLANE_TAG:-latest}
     container_name: headplane 
     restart: unless-stopped
     depends_on:
