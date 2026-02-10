@@ -40,10 +40,10 @@ services:
     container_name: url-guard
     restart: unless-stopped
     environment:
-      URL: "${URL}"
-      INTERVAL_SECONDS: "${URL_INTERVAL:-10}"
-      TIMEOUT_SECONDS: "${URL_TIMEOUT:-5}"
-      MAX_REDIRS: "${URL_MAX_REDIRS:-10}"
+      URL: "${OIDC_URL}"
+      INTERVAL_SECONDS: "${OIDC_URL_INTERVAL:-10}"
+      TIMEOUT_SECONDS: "${OIDC_URL_TIMEOUT:-5}"
+      MAX_REDIRS: "${OIDC_URL_MAX_REDIRS:-10}"
       TARGET_CONTAINERS: "headscale headplane"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
