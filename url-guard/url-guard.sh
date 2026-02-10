@@ -75,6 +75,10 @@ fi
 # --- Main loop: watch URL and restart targets on recovery ---------------
 echo "$(date -Iseconds) url-guard starting — watching $URL every ${INTERVAL_SECONDS}s"
 
+# Brief delay to let the container network initialize, avoiding a false
+# "unreachable" on the very first probe.
+sleep 3
+
 state="unknown"
 while true; do
   if check_url; then
