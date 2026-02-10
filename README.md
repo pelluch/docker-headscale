@@ -1,6 +1,6 @@
 # Headscale + Headplane Stack
 
-> Note: I used Claude to generate this README.
+> Note: I used Claude to generate this README and facilitate the creation of url-guard.sh. I am a software engineer and have reviewed all changes, however.
 
 Docker Compose stack running [Headscale](https://github.com/juanfont/headscale) (self-hosted Tailscale control server) with [Headplane](https://github.com/tale/headplane) (web UI) and a URL monitoring sidecar.
 
