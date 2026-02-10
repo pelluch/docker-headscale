@@ -9,7 +9,6 @@ services:
     environment:
       - TZ=${TZ}
     volumes:
-      # Please change <CONFIG_PATH> to the fullpath of the config folder just created
       - ./headscale/config:/etc/headscale
       - ./headscale/lib/headscale:/var/lib/headscale
     command: serve
@@ -18,7 +17,6 @@ services:
         condition: service_healthy
 
   headplane:
-    # I recommend you pin the version to a specific release
     image: ghcr.io/tale/headplane:latest
     container_name: headplane 
     restart: unless-stopped
@@ -31,13 +29,8 @@ services:
       - '${HEADPLANE_EXTERNAL_PORT}:3000'
     volumes:
       - './headplane/config/config.yaml:/etc/headplane/config.yaml'
-      # This should match headscale.config_path in your config.yaml
       - './headscale/config/config.yaml:/etc/headscale/config.yaml'
-
-      # Headplane stores its data in this directory
       - './headplane/data:/var/lib/headplane'
-
-      # If you are using the Docker integration, mount the Docker socket
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
     environment:
       - TZ=${TZ}
