@@ -37,6 +37,7 @@ services:
 
   url-guard:
     build: ./url-guard
+    pull_policy: build
     container_name: url-guard
     restart: unless-stopped
     environment:
